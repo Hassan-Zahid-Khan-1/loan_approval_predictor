@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Approval Predictor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563eb',
+                        secondary: '#1e40af',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen py-8">
+    <div class="max-w-4xl mx-auto px-4">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-gray-800 mb-2">Loan Approval Predictor</h1>
+            <p class="text-gray-600 text-lg">Get instant predictions on your loan approval chances</p>
+        </div>
+
+        <!-- Main Form Card -->
+        <div class="bg-white rounded-2xl shadow-xl p-8">
+            <form method="POST" >
+                {% csrf_token %}
+                <!-- Personal Information Section -->
+                <div class="border-b border-gray-200 pb-6">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-6 flex items-center">
+                        <svg class="w-6 h-6 mr-2 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                        </svg>
+                        Personal Information
+                    </h2>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <!-- Number of Dependents -->
+                        <div>
+                            <label for="dependents" class="block text-sm font-medium text-gray-700 mb-2">
+                                Number of Dependents
+                            </label>
+                            <input 
+                                type="number" 
+                                id="dependents" 
+                                name="no_of_dependents"
+                                
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200"
+                                placeholder="Enter number of dependents"
+                                 required
+                            >
+                        </div>
+
+                        <!-- Education -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Education Status
+                            </label>
+                            <div class="flex space-x-4">
+                                <label class="flex items-center">
+                                    <input type="radio" name="education" value="yes" class="w-4 h-4 text-primary focus:ring-primary border-gray-300">
+                                    <span class="ml-2 text-gray-700">Graduate</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="education" value="no" class="w-4 h-4 text-primary focus:ring-primary border-gray-300">
+                                    <span class="ml-2 text-gray-700">Not Graduate</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Self Employed -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Employment Status
+                            </label>
+                            <div class="flex space-x-4">
+                                <label class="flex items-center">
+                                    <input type="radio" name="self_employed" value="yes" class="w-4 h-4 text-primary focus:ring-primary border-gray-300">
+                                    <span class="ml-2 text-gray-700">Self Employed</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="self_employed" value="no" class="w-4 h-4 text-primary focus:ring-primary border-gray-300">
+                                    <span class="ml-2 text-gray-700">Employed</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Annual Income -->
+                        <div>
+                            <label for="income" class="block text-sm font-medium text-gray-700 mb-2">
+                                Annual Income (Rs)
+                            </label>
+                            <input 
+                                type="int" 
+                                id="income" 
+                                name="income_annum"
+                               
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200"
+                                placeholder="Enter annual income"
+                                 required
+                            >
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Loan Information Section -->
+                <div class="border-b border-gray-200 pb-6">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-6 flex items-center">
+                        <svg class="w-6 h-6 mr-2 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                        </svg>
+                        Loan Details
+                    </h2>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <!-- Loan Amount -->
+                        <div>
+                            <label for="loan_amount" class="block text-sm font-medium text-gray-700 mb-2">
+                                Loan Amount (Rs)
+                            </label>
+                            <input 
+                                type="number" 
+                                id="loan_amount" 
+                                name="loan_amount"
+                              
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200"
+                                placeholder="Enter loan amount"
+                                 required
+                            >
+                        </div>
+
+                        <!-- Loan Term -->
+                        <div>
+                            <label for="loan_term" class="block text-sm font-medium text-gray-700 mb-2">
+                                Loan Term (months)
+                            </label>
+                            <input 
+                                type="number" 
+                                id="loan_term" 
+                                name="loan_term"
+                                max="24"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200"
+                                placeholder="Enter loan term in months"
+                                 required
+                            >
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Assets Information Section -->
+                <div class="pb-6">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-6 flex items-center">
+                        <svg class="w-6 h-6 mr-2 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                        </svg>
+                        Asset Information
+                    </h2>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <!-- Residential Assets -->
+                        <div>
+                            <label for="residential_assets" class="block text-sm font-medium text-gray-700 mb-2">
+                                Residential Assets Value (Rs)
+                            </label>
+                            <input 
+                                type="number" 
+                                id="residential_assets" 
+                                name="residential_assets_value"
+                               
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200"
+                                placeholder="Enter residential assets value"
+                                 required
+                            >
+                        </div>
+
+                        <!-- Commercial Assets -->
+                        <div>
+                            <label for="commercial_assets" class="block text-sm font-medium text-gray-700 mb-2">
+                                Commercial Assets Value (Rs)
+                            </label>
+                            <input 
+                                type="number" 
+                                id="commercial_assets" 
+                                name="commercial_assets_value"
+                               
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200"
+                                placeholder="Enter commercial assets value"
+                                 required
+                            >
+                        </div>
+
+                        <!-- Luxury Assets -->
+                        <div>
+                            <label for="luxury_assets" class="block text-sm font-medium text-gray-700 mb-2">
+                                Luxury Assets Value (Rs)
+                            </label>
+                            <input 
+                                type="number" 
+                                id="luxury_assets" 
+                                name="luxury_assets_value"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200"
+                                placeholder="Enter luxury assets value"
+                                 required
+                            >
+                        </div>
+
+                        <!-- Bank Assets -->
+                        <div>
+                            <label for="bank_assets" class="block text-sm font-medium text-gray-700 mb-2">
+                                Bank Asset Value (Rs)
+                            </label>
+                            <input 
+                                type="number" 
+                                id="bank_assets" 
+                                name="bank_asset_value"
+                              
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200"
+                                placeholder="Enter bank asset value"
+                                required
+                            >
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="pt-6">
+                    <button 
+                        type="submit" 
+                        class="w-full bg-gradient-to-r from-primary to-secondary text-white font-semibold py-4 px-8 rounded-lg hover:from-secondary hover:to-primary transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl"
+                    >
+                        <span class="flex items-center justify-center">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            Predict Loan Approval
+                        </span>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center mt-8 text-gray-600">
+            <p class="text-sm">{{results}}</p>
+        </div>
+    </div>
+
+</body>
+</html>

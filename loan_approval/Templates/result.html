@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Approval Result</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563eb',
+                        secondary: '#1e40af',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen py-8">
+    <div class="max-w-2xl mx-auto px-4">
+        <!-- Header -->
+       
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-gray-800 mb-2">Loan Approval Result</h1>
+            <p class="text-gray-600 text-lg">Your prediction is ready</p>
+        </div>
+
+        <!-- Result Card -->
+        <div class="bg-white rounded-2xl shadow-xl p-8 text-center">
+            <!-- Success Result -->
+            <div id="approved-result" class="hidden">
+                <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <svg class="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-green-600 mb-4">Loan Approved!</h2>
+                <p class="text-gray-600 text-lg mb-8">Congratulations! Your loan application has a high probability of approval based on the provided information.</p>
+            </div>
+
+            <!-- Rejection Result -->
+            <div id="rejected-result" class="hidden">
+                <div class="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <svg class="w-10 h-10 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+
+                </div>
+                <h1>{{result}}</h1>
+                <h2 class="text-3xl font-bold text-red-600 mb-4"></h2>
+                <p class="text-gray-600 text-lg mb-8">Based on the provided information, your loan application may face challenges in approval. Consider improving your financial profile.</p>
+            </div>
+ 
+            <h1 class=my-6>{{result}}</h1>
+            <!-- Action Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button 
+                    onclick="window.history.back()" 
+                    class="px-8 py-3 border-2 border-primary text-primary font-semibold rounded-lg hover:bg-primary hover:text-white transition-all duration-200"
+                >
+                    Try Again
+                </button>
+               <a href="/"  class="px-8 py-3 bg-gradient-to-r from-primary to-secondary text-white font-semibold rounded-lg hover:from-secondary hover:to-primary transition-all duration-200">New prediction</a>
+            </div>
+        </div>
+
+        <!-- Additional Information -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mt-6">
+            <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                <svg class="w-5 h-5 mr-2 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                Important Note
+            </h3>
+            <p class="text-gray-600 text-sm leading-relaxed">
+                This prediction is based on machine learning algorithms and historical data. 
+                The actual loan approval decision may vary based on additional factors not included in this model. 
+                Please consult with your financial institution for official loan approval processes.
+            </p>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center mt-8 text-gray-600">
+            <p class="text-sm">Secure and confidential loan approval prediction</p>
+        </div>
+    </div>
+        
+</body>
+</html>
